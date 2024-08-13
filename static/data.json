@@ -1,0 +1,267 @@
+{
+    "patterns": [
+        {
+            "name": "Sinusoidal",
+            "type": "formula",
+            "formula": "height / 2 + A * Math.sin(B * x + C) * height / 4",
+            "variables": {
+                "A": 2,
+                "B": 0.5,
+                "C": 0,
+                "spacing": 1
+            }
+        },
+        {
+            "name": "Polar Graph",
+            "type": "formula",
+            "formula": "A * Math.sin(B * theta + C)",
+            "variables": {
+                "A": 500,
+                "B": 100,
+                "C": 0,
+                "thetaIncrement": 0.0005,
+                "spacing": 2
+            }
+        },
+        
+        {
+            "name": "Julia Set",
+            "type": "procedure",
+            "procedure": [
+                "let result = null;",
+                "let iteration = maxIterations;", 
+                "let zx = 1.5 * (x - width / 2) / (0.5 * width);",
+                "let zy = (y - height / 2) / (0.5 * height);",
+                "while (zx * zx + zy * zy < 4 && iteration > 0) {",
+                "   let xtmp = zx * zx - zy * zy + cx;",
+                "   zy = 2.0 * zx * zy + cy;",
+                "   zx = xtmp;",
+                "   iteration--; }",
+                "result = (iteration === 0) ? 0 : (maxIterations - iteration) * 255 / maxIterations;"
+            ],
+            "variables": {
+                "c": "0.355 + 0.355i",
+                "maxIterations": 100,
+                "spacing": 10
+            }
+        },
+        {
+            "name": "Equilateral Triangle",
+            "type": "procedure",
+            "procedure": [
+                "const h = (Math.sqrt(3) / 2) * sideLength;",
+                "ctx.moveTo(x, y);",
+                "ctx.lineTo(x + sideLength / 2, y + h);",
+                "ctx.lineTo(x - sideLength / 2, y + h);",
+                "ctx.closePath();",
+                "ctx.stroke();"
+            ],
+            "variables": {
+                "sideLength": 100,
+                "spacing": 50
+            }
+        },
+        {
+            "name": "Lissajous Curve",
+            "type": "formula",
+            "formula": "height / 2 + A * Math.sin(B * t + delta) * height / 4",
+            "variables": {
+                "A": 1,
+                "B": 2,
+                "delta": "Math.PI / 2",
+                "spacing": 1,
+                "tIncrement": 0.01
+            }
+        },
+        {
+            "name": "Rose Curve",
+            "type": "formula",
+            "formula": "width / 2 + Math.cos(k * theta) * Math.cos(theta) * width / 4",
+            "variables": {
+                "k": 5,
+                "n": 4,
+                "spacing": 1,
+                "thetaIncrement": 0.01 
+            }
+        }
+                        
+        
+    ],
+    "monomers": [
+        {
+            "name": "Circle",
+            "image": "",
+            "color": "red",
+            "shape": "circle",
+            "size": 20,
+            "orientation": 0,
+            "periodicColor": true,
+            "colorPattern": "viridis",
+            "followVector": false,
+            "vectorAxis": "long",
+            "variables": {
+                "color": "red",
+                "shape": "circle",
+                "size": 20,
+                "orientation": 0,
+                "periodicColor": true
+            }
+        },
+        {
+            "name": "Rectangle",
+            "image": "",
+            "color": "blue",
+            "shape": "rectangle",
+            "size": 20,
+            "orientation": 0,
+            "periodicColor": false,
+            "colorPattern": "rainbow",
+            "followVector": false,
+            "vectorAxis": "long",
+            "variables": {
+                "color": "blue",
+                "shape": "rectangle",
+                "size": 20,
+                "orientation": 0,
+                "periodicColor": false
+            }
+        }
+    ],
+    "colorPatterns": {
+        "rainbow": [
+            "rgb(255, 0, 0)",
+            "rgb(255, 127, 0)",
+            "rgb(255, 255, 0)",
+            "rgb(0, 255, 0)",
+            "rgb(0, 0, 255)",
+            "rgb(75, 0, 130)",
+            "rgb(148, 0, 211)"
+        ],
+        "viridis": [
+            "#440154", "#481567", "#482677", "#453781", "#404788", "#39568C", "#33638D", "#2D708E", "#287D8E", "#238A8D", "#1F968B", "#20A387", "#29AF7F", "#3CBB75", "#55C667", "#73D055", "#95D840", "#B8DE29", "#DCE319", "#FDE725"
+        ],
+        "viridis_symmetric": [
+            "#440154", "#481567", "#482677", "#453781", "#404788", "#39568C", "#33638D", "#2D708E", "#287D8E", "#238A8D", "#1F968B", "#20A387", "#29AF7F", "#3CBB75", "#55C667", "#73D055", "#95D840", "#B8DE29", "#DCE319", "#FDE725",
+            "#DCE319", "#B8DE29", "#95D840", "#73D055", "#55C667", "#3CBB75", "#29AF7F", "#20A387", "#1F968B", "#238A8D", "#287D8E", "#2D708E", "#33638D", "#39568C", "#404788", "#453781", "#482677", "#481567", "#440154"
+        ],
+        "magma": [
+            "#000004", "#140B3A", "#3B0F6F", "#641A80", "#8C2981", "#B5367A", "#DE4968", "#F66E5C", "#FE9F6D", "#FEC287", "#FEE08B", "#FCFDA4"
+        ],
+        "magma_symmetric": [
+            "#000004", "#140B3A", "#3B0F6F", "#641A80", "#8C2981", "#B5367A", "#DE4968", "#F66E5C", "#FE9F6D", "#FEC287", "#FEE08B", "#FCFDA4",
+            "#FEE08B", "#FEC287", "#FE9F6D", "#F66E5C", "#DE4968", "#B5367A", "#8C2981", "#641A80", "#3B0F6F", "#140B3A", "#000004"
+        ],
+        "plasma": [
+            "#0D0887", "#220690", "#320597", "#40049D", "#4D02A1", "#5A01A5", "#6700A7", "#7501A8", "#8203A8", "#8F0BA6", "#9D13A2", "#AA1A9D", "#B62396", "#C22C8E", "#CE3685", "#D9407B", "#E54A70", "#F05665", "#FA6360", "#FD7466"
+        ],
+        "plasma_symmetric": [
+            "#0D0887", "#220690", "#320597", "#40049D", "#4D02A1", "#5A01A5", "#6700A7", "#7501A8", "#8203A8", "#8F0BA6", "#9D13A2", "#AA1A9D", "#B62396", "#C22C8E", "#CE3685", "#D9407B", "#E54A70", "#F05665", "#FA6360", "#FD7466",
+            "#FA6360", "#F05665", "#E54A70", "#D9407B", "#CE3685", "#C22C8E", "#B62396", "#AA1A9D", "#9D13A2", "#8F0BA6", "#8203A8", "#7501A8", "#6700A7", "#5A01A5", "#4D02A1", "#40049D", "#320597", "#220690", "#0D0887"
+        ],
+        "cividis": [
+            "#00224E", "#002E6C", "#0C4166", "#15534F", "#22563C", "#2B6418", "#366F00", "#4A7800", "#5A8000", "#6A8900", "#7A9100", "#8A9A00", "#9AA300", "#AAAC00", "#BAB500", "#CBBD00", "#DBC700", "#ECD000", "#FDDA00"
+        ],
+        "cividis_symmetric": [
+            "#00224E", "#002E6C", "#0C4166", "#15534F", "#22563C", "#2B6418", "#366F00", "#4A7800", "#5A8000", "#6A8900", "#7A9100", "#8A9A00", "#9AA300", "#AAAC00", "#BAB500", "#CBBD00", "#DBC700", "#ECD000", "#FDDA00",
+            "#ECD000", "#DBC700", "#CBBD00", "#BAB500", "#AAAC00", "#9AA300", "#8A9A00", "#7A9100", "#6A8900", "#5A8000", "#4A7800", "#366F00", "#2B6418", "#22563C", "#15534F", "#0C4166", "#002E6C", "#00224E"
+        ],
+        "inferno": [
+            "#000004", "#160B39", "#420A68", "#6A176E", "#932667", "#BC3754", "#DD513A", "#F37819", "#FCA50A", "#F6D746", "#FCFFA4"
+        ],
+        "inferno_symmetric": [
+            "#000004", "#160B39", "#420A68", "#6A176E", "#932667", "#BC3754", "#DD513A", "#F37819", "#FCA50A", "#F6D746", "#FCFFA4",
+            "#F6D746", "#FCA50A", "#F37819", "#DD513A", "#BC3754", "#932667", "#6A176E", "#420A68", "#160B39", "#000004"
+        ]
+    },
+    "presets": [
+        {
+            "name": "Default Sinusoidal",
+            "pattern": {
+                "name": "Sinusoidal",
+                "variables": {
+                    "A": 2,
+                    "B": 0.5,
+                    "C": 0,
+                    "spacing": 1
+                }
+            },
+            "monomer": {
+                "name": "Circle",
+                "variables": {
+                    "color": "red",
+                    "shape": "circle",
+                    "size": 20,
+                    "orientation": 0,
+                    "periodicColor": true,
+                    "colorPattern": "viridis",
+                    "followVector": false,
+                    "vectorAxis": "long"
+                }
+            },
+            "animation": {
+                "stepSize": 0.00001,
+                "rate": 5
+            }
+        },
+        {
+            "name": "Polar Graph Example 1",
+            "pattern": {
+                "name": "Polar Graph",
+                "variables": {
+                    "A": 500,
+                    "B": 100,
+                    "C": 0,
+                    "thetaIncrement": 0.0005,
+                    "spacing": 2
+                }
+            },
+            "monomer": {
+                "name": "Circle",
+                "variables": {
+                    "color": "red",
+                    "shape": "circle",
+                    "size": 50,
+                    "orientation": 0,
+                    "periodicColor": true,
+                    "colorPattern": "viridis_symmetric",
+                    "followVector": false,
+                    "vectorAxis": "long"
+                }
+            },
+            "animation": {
+                "stepSize": 0.00000001,
+                "rate": 5
+            }
+        },
+        {
+            "name": "Polar Graph Example 2",
+            "pattern": {
+                "name": "Polar Graph",
+                "variables": {
+                    "A": 200,
+                    "B": 200,
+                    "C": 2,
+                    "thetaIncrement": 0.005,
+                    "spacing": 5
+                }
+            },
+            "monomer": {
+                "name": "Circle",
+                "variables": {
+                    "color": "red",
+                    "shape": "circle",
+                    "size": 20,
+                    "orientation": 0,
+                    "periodicColor": true,
+                    "colorPattern": "viridis",
+                    "followVector": false,
+                    "vectorAxis": "long"
+                }
+            },
+            "animation": {
+                "stepSize": 0.00001,
+                "rate": 5
+            }
+        }
+    ]
+}

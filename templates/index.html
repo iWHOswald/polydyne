@@ -1,0 +1,235 @@
+<!-- 
+INSTRUCTIONS FOR FUTURE DEVELOPMENT:
+-------------------------------------
+This file (`index.html`) is the main entry point for the Geometric Pattern Drawer web application. 
+It structures the user interface, which includes several collapsible accordion panels for 
+controlling the pattern, monomer, and animation settings. 
+
+The comments within this file provide detailed explanations of each section's purpose and functionality, 
+allowing future developers to understand the layout and logic of the interface. This understanding 
+is crucial for extending or modifying the application's user experience.
+
+The file links to several external resources, including Bootstrap for styling and JavaScript files for 
+dynamic functionality. Any updates or changes to the UI or its behavior should be reflected and explained 
+in the comments.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometric Pattern Drawer</title>
+    <!-- Link to Bootstrap CSS for styling the page -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link to custom styles (if any) in styles.css -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar containing accordion menus for Presets, Pattern, Monomer, and Animation controls -->
+            <div class="col-md-3">
+                <div class="accordion" id="accordionExample">
+                    
+                    <!-- Preset Accordion -->
+                    <div class="card">
+                        <div class="card-header" id="headingPreset">
+                            <h5 class="mb-0">
+                                <!-- Button to toggle the Presets accordion -->
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapsePreset" aria-expanded="true" aria-controls="collapsePreset">
+                                    Presets
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapsePreset" class="collapse show" aria-labelledby="headingPreset" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Dropdown for selecting a preset from the JSON data -->
+                                <div class="form-group">
+                                    <label for="preset-select">Select Preset:</label>
+                                    <select id="preset-select" class="form-control"></select>
+                                </div>
+                                <!-- Button to load the selected preset -->
+                                <button id="load-preset" class="btn btn-primary mt-3">Load Preset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pattern Accordion -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <!-- Button to toggle the Pattern accordion -->
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Pattern
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Dropdown for selecting a pattern from the JSON data -->
+                                <div class="form-group">
+                                    <label for="pattern-select">Select Pattern:</label>
+                                    <select id="pattern-select" class="form-control"></select>
+                                </div>
+                                <!-- Dynamic input fields for pattern variables will be inserted here -->
+                                <div id="pattern-variables"></div>
+                                <!-- Input for selecting background color or making it transparent -->
+                                <div class="form-group">
+                                    <label for="background-color">Background Color:</label>
+                                    <input type="color" id="background-color" class="form-control" value="#ffffff">
+                                    <small><input type="checkbox" id="background-transparent"> Transparent</small>
+                                </div>
+                                <!-- Button to apply changes to the pattern -->
+                                <button id="update-pattern" class="btn btn-secondary mt-3">Update Pattern</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monomer Accordion -->
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <!-- Button to toggle the Monomer accordion -->
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Monomer
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Dropdown for selecting a monomer from the JSON data -->
+                                <div class="form-group">
+                                    <label for="monomer-select">Select Monomer:</label>
+                                    <select id="monomer-select" class="form-control"></select>
+                                </div>
+                                <!-- Dynamic input fields for monomer variables will be inserted here -->
+                                <div id="monomer-variables"></div>
+                                <!-- Dropdown for selecting a color pattern for the monomer -->
+                                <div class="form-group">
+                                    <label for="color-pattern-select">Select Color Pattern:</label>
+                                    <select id="color-pattern-select" class="form-control">
+                                        <!-- Predefined color patterns from the JSON data -->
+                                        <option value="rainbow">Rainbow</option>
+                                        <option value="viridis">Viridis</option>
+                                        <option value="viridis_symmetric">Viridis Symmetric</option>
+                                        <option value="magma">Magma</option>
+                                        <option value="magma_symmetric">Magma Symmetric</option>
+                                        <option value="plasma">Plasma</option>
+                                        <option value="plasma_symmetric">Plasma Symmetric</option>
+                                        <option value="cividis">Cividis</option>
+                                        <option value="cividis_symmetric">Cividis Symmetric</option>
+                                        <option value="inferno">Inferno</option>
+                                        <option value="inferno_symmetric">Inferno Symmetric</option>
+                                    </select>
+                                </div>
+                                <!-- Option to enable vector-following for anisotropic shapes -->
+                                <div class="form-group">
+                                    <label for="follow-vector">Follow Vector:</label>
+                                    <input type="checkbox" id="follow-vector">
+                                </div>
+                                <!-- Dropdown to choose which edge to follow the vector path -->
+                                <div class="form-group">
+                                    <label for="vector-axis">Vector Axis:</label>
+                                    <select id="vector-axis" class="form-control">
+                                        <option value="long">Long Edge</option>
+                                        <option value="short">Short Edge</option>
+                                    </select>
+                                </div>
+                                <!-- Button to apply changes to the monomer -->
+                                <button id="update-monomer" class="btn btn-secondary mt-3">Update Monomer</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Animation Accordion -->
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <!-- Button to toggle the Animation accordion -->
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Animation
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Input for setting the step size for animation -->
+                                <div class="form-group">
+                                    <label for="step-size">Step Size:</label>
+                                    <input type="number" id="step-size" class="form-control" value="0.00001">
+                                </div>
+                                <!-- Input for setting the rate (milliseconds) for animation -->
+                                <div class="form-group">
+                                    <label for="rate">Rate (ms):</label>
+                                    <input type="number" id="rate" class="form-control" value="5">
+                                </div>
+                                <!-- Dropdown for selecting which variable to animate -->
+                                <div class="form-group">
+                                    <label for="animate-variable">Animate Variable:</label>
+                                    <select id="animate-variable" class="form-control">
+                                        <!-- Variables from the currently selected pattern -->
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="spacing">Spacing</option>
+                                    </select>
+                                </div>
+                                <!-- Button to start the animation -->
+                                <button id="animate-button" class="btn btn-primary mt-3">Animate</button>
+                                <!-- Button to pause the animation -->
+                                <button id="pause-animation" class="btn btn-warning mt-3">Pause Animation</button>
+                                <!-- Button to load preset animation settings -->
+                                <button id="load-animation-preset" class="btn btn-secondary mt-3">Load Animation Preset</button>
+                            </div>
+                        </div>
+                    
+                    <!-- New Symmetry Accordion -->
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h5 class="mb-0">
+                                <!-- Button to toggle the Symmetry accordion -->
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Symmetry
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <!-- Section for displaying the symmetry score live plot -->
+                                <canvas id="symmetry-canvas" width="400" height="300" class="border"></canvas>
+                                <!-- Box for displaying the current symmetry score -->
+                                <div class="form-group mt-3">
+                                    <label for="current-symmetry">Current Symmetry Score:</label>
+                                    <input type="text" id="current-symmetry" class="form-control" readonly>
+                                </div>
+                                <!-- Buttons to control symmetry analysis -->
+                                <button id="start-symmetry-analysis" class="btn btn-primary mt-3">Start Symmetry Analysis</button>
+                                <button id="stop-symmetry-analysis" class="btn btn-danger mt-3">Stop Symmetry Analysis</button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas for drawing the patterns -->
+            <div class="col-md-9">
+                <canvas id="pattern-canvas" width="800" height="600" class="border"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS for handling the UI components -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript files for handling the application logic -->
+    <script src="/static/data.js"></script>
+    <script src="/static/ui.js"></script>
+    <script src="/static/draw.js"></script>
+    <script src="/static/main.js"></script>
+</body>
+</html>
