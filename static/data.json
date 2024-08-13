@@ -175,6 +175,37 @@
     },
     "presets": [
         {
+            "name": "psychedelic wall viewing",
+            "pattern": {
+                "name": "Polar Graph",
+                "variables": {
+                    "A": 500,
+                    "B": 100,
+                    "C": 0,
+                    "thetaIncrement": 0.0005,
+                    "spacing": 2
+                }
+            },
+            "monomer": {
+                "name": "Circle",
+                "variables": {
+                    "color": "black",
+                    "shape": "circle",
+                    "size": 5,
+                    "orientation": 0,
+                    "periodicColor": false,
+                    "colorPattern": "viridis_symmetric",
+                    "followVector": false,
+                    "vectorAxis": "long"
+                }
+            },
+            "animation": {
+                "stepSize": 0.00000001,
+                "rate": 5
+            }
+        },
+
+        {
             "name": "Default Sinusoidal",
             "pattern": {
                 "name": "Sinusoidal",
