@@ -1,17 +1,6 @@
 {
     "patterns": [
         {
-            "name": "Sinusoidal",
-            "type": "formula",
-            "formula": "height / 2 + A * Math.sin(B * x + C) * height / 4",
-            "variables": {
-                "A": 2,
-                "B": 0.5,
-                "C": 0,
-                "spacing": 1
-            }
-        },
-        {
             "name": "Polar Graph",
             "type": "formula",
             "formula": "A * Math.sin(B * theta + C)",
@@ -20,7 +9,19 @@
                 "B": 100,
                 "C": 0,
                 "thetaIncrement": 0.0005,
-                "spacing": 2
+                "spacing": 1
+            }
+        },
+
+        {
+            "name": "Sinusoidal",
+            "type": "formula",
+            "formula": "height / 2 + A * Math.sin(B * x + C) * height / 4",
+            "variables": {
+                "A": 2,
+                "B": 0.5,
+                "C": 0,
+                "spacing": 1
             }
         },
         
@@ -91,11 +92,11 @@
         {
             "name": "Circle",
             "image": "",
-            "color": "red",
+            "color": "black",
             "shape": "circle",
-            "size": 20,
+            "size": 5,
             "orientation": 0,
-            "periodicColor": true,
+            "periodicColor": false,
             "colorPattern": "viridis",
             "followVector": false,
             "vectorAxis": "long",
@@ -204,7 +205,6 @@
                 "rate": 5
             }
         },
-
         {
             "name": "Default Sinusoidal",
             "pattern": {

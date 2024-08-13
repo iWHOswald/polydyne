@@ -7,6 +7,11 @@ the HTML, CSS, JavaScript, and data files to the client, as well as handling req
 
 The comments within this file provide a detailed explanation of the structure and functionality of the 
 code, enabling future developers to understand how the server operates and how to extend or modify its capabilities.
+
+TO DEPLOY ON DO: deploy, it will fail. then goto app spec. change line to be:   
+run_command: gunicorn --worker-tmp-dir /dev/shm app:app
+where "app:app" is "file name of entry.py:app"
+
 """
 
 # Import the Flask module and required functions.
