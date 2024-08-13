@@ -184,12 +184,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const defaultPattern = preset.pattern;
         const defaultMonomer = preset.monomer;
         const animation = preset.animation;
-
+    
         if (defaultPattern) {
             patternSelect.value = defaultPattern.name;
             generateInputFields(patternVariables, defaultPattern.variables); // Generate input fields for pattern variables
+    
+            // Populate the animate-variable dropdown based on the pattern variables
+            populateAnimateVariableDropdown(defaultPattern.variables);
         }
-
+    
         if (defaultMonomer) {
             monomerSelect.value = defaultMonomer.name;
             generateInputFields(monomerVariables, defaultMonomer.variables); // Generate input fields for monomer variables
@@ -197,15 +200,15 @@ document.addEventListener('DOMContentLoaded', () => {
             followVectorCheckbox.checked = defaultMonomer.variables.followVector || false;
             vectorAxisSelect.value = defaultMonomer.variables.vectorAxis || 'long';
         }
-
+    
         if (animation) {
             stepSizeInput.value = animation.stepSize;
             rateInput.value = animation.rate;
         }
-
+    
         drawPattern(ctx, patterns, monomers, colorPatterns); // Draw the pattern with the presets
     };
-    
+
     const fetchJsonData = async () => {
         const data = await loadJsonData(); // Assuming loadJsonData() fetches and returns the parsed JSON data
         patterns = data.patterns;

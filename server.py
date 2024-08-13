@@ -44,4 +44,4 @@ def get_data():
 # in debug mode. Debug mode provides detailed error messages and automatically reloads the server 
 # when changes are made to the code.
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False)

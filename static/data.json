@@ -5,10 +5,10 @@
             "type": "formula",
             "formula": "A * Math.sin(B * theta + C)",
             "variables": {
+                "thetaIncrement": 0.0005,
                 "A": 500,
                 "B": 100,
                 "C": 0,
-                "thetaIncrement": 0.0005,
                 "spacing": 1
             }
         },
@@ -180,10 +180,10 @@
             "pattern": {
                 "name": "Polar Graph",
                 "variables": {
+                    "thetaIncrement": 0.0005,
                     "A": 500,
                     "B": 100,
                     "C": 0,
-                    "thetaIncrement": 0.0005,
                     "spacing": 1
                 }
             },
@@ -201,7 +201,7 @@
                 }
             },
             "animation": {
-                "stepSize": 0.00000000005,
+                "stepSize": 0.0000000003,
                 "rate": 5
             }
         },
