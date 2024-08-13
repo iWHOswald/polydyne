@@ -205,22 +205,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         drawPattern(ctx, patterns, monomers, colorPatterns); // Draw the pattern with the presets
     };
-
-    // Fetch and load JSON data
+    
     const fetchJsonData = async () => {
-        const data = await loadJsonData();
+        const data = await loadJsonData(); // Assuming loadJsonData() fetches and returns the parsed JSON data
         patterns = data.patterns;
         monomers = data.monomers;
         colorPatterns = data.colorPatterns;
         presets = data.presets;
-
+    
         populateSelect(patternSelect, patterns); // Populate pattern dropdown
         populateSelect(monomerSelect, monomers); // Populate monomer dropdown
-        populateSelect(presetSelect, presets); // Populate preset dropdown
-
-        applyPresets(presets[0]); // Apply the first preset after loading data
+        populateSelect(presetSelect, presets);   // Populate preset dropdown
+    
+        // Apply the first preset automatically when the page loads
+        if (presets.length > 0) {
+            applyPresets(presets[0]); // Load and apply the first preset
+            presetSelect.value = presets[0].name; // Set the preset dropdown to the first preset
+        }
     };
-
+    
     // Load the selected preset when the button is clicked
     loadPresetButton.addEventListener('click', () => {
         const selectedPreset = presets[presetSelect.value];

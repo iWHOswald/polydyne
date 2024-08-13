@@ -184,7 +184,7 @@
                     "B": 100,
                     "C": 0,
                     "thetaIncrement": 0.0005,
-                    "spacing": 2
+                    "spacing": 1
                 }
             },
             "monomer": {
@@ -201,7 +201,7 @@
                 }
             },
             "animation": {
-                "stepSize": 0.00000001,
+                "stepSize": 0.00000000005,
                 "rate": 5
             }
         },
